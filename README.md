@@ -6,7 +6,7 @@
   <li>Batzang Mangundu 22602700 - report</li>
   <li>Paulus Hamukoto 226032078 - Testing, documentation and Git coordination & Functions, integration and validation
 </li>
-<li>Themba Nkosi Mahile 226014290 - Supplier Management</li>
+<li>Thembi Nkosi Mahile 226014290 - Supplier Management</li>
         <li>Gerson kaputjaza 225118556 - Budget Management</li>
         <li>benjamin ######### - Employee Management & Git coordination & Functions, integration and validation</li>
 </li>
