@@ -8,7 +8,7 @@
 </li>
 <li>Thembi Nkosi Mahile 226014290 - Supplier Management</li>
         <li>Gerson kaputjaza 225118556 - Budget Management</li>
-        <li>benjamin ######### - Employee Management & Git coordination & Functions, integration and validation</li>
+        <li>Benjamin Belvinoh Masule 226005402 - Employee Management & Git coordination & Functions, integration and validation</li>
 </li>
 </ul>
 <h4>System features</h1>
