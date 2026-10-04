@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <supplier.h>
 
 // Global variables so functions can access them easily
 char supplierNames[5][100];
