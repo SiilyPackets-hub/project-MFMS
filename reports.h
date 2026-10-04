@@ -1,21 +1,14 @@
+#ifndef REPORTS_H
+#define REPORTS_H
+
 #include "employees.h"
 #include "budget.h"
 #include "suppliers.h"
 #include "assets.h"
 
-void displayReportMenu(
-    Employee employees[], int empCount,
-    DepartmentBudget budgets[], int budgetCount,
-    Supplier suppliers[], int supplierCount,
-    Asset assets[], int assetCount,
-);
+void employeeReport(struct Employee employees[], int count);
+void budgetReport(struct Budget budgets[], int count);
+void supplierReport(struct Supplier suppliers[], int count);
+void assetReport(struct Asset assets[], int count);
 
-void generateEmployeeReport(const Employee employees[], int count);
-void generateBudgetReport(const DepartmentBudget budgets[], int count);
-void generateSupplierReport(const Supplier suppliers[], int count);
-void generateAssetReport(const Asset assets[], int count);
-
-endif
-
-return 0;
-}
+#endif
