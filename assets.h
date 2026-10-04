@@ -1,8 +1,6 @@
 #ifndef ASSETS_H
 #define ASSETS_H
-
 #define MAX_ASSETS 100
-
 
 struct Asset {
     int id;
