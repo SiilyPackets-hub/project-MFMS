@@ -2,68 +2,82 @@
 #include <string.h>
 #include "budget.h"
 
-void displayBudgetMenu()
+void addBudget(struct Budget budgets[], int *count)
 {
-    printf("\n=== BUDGET MANAGEMENT ===\n");
-    printf("1. Enter Department Budgets\n");
-    printf("2. Display Budget Report\n");
-}
-
-float calculateRemainingBudget(float allocated, float expenditure)
-{
-    return allocated - expenditure;
-}
-
-void enterBudgets(char deptNames[][50], float allocated[], float expenses[], int count)
-{
-    for (int i = 0; i < count; i++)
-    {
-        printf("\n--- Entry for Department %d ---\n", i + 1);
-        printf("Enter Department Name: ");
-        scanf(" %49[^\n]", deptNames[i]);
-
-        do
-        {
-            printf("Enter Allocated Budget for %s: N$", deptNames[i]);
-            scanf("%f", &allocated[i]);
-            if (allocated[i] < 0)
-            {
-                printf("Error: Negative budget should not be accepted. Please try again.\n");
-            }
-        } while (allocated[i] < 0);
-
-        do
-        {
-            printf("Enter Expenditure for %s: N$", deptNames[i]);
-            scanf("%f", &expenses[i]);
-            if (expenses[i] < 0)
-            {
-                printf("Error: Negative expenditure should not be accepted. Please try again.\n");
-            }
-        } while (expenses[i] < 0);
+    if (*count >= MAX_BUDGETS) {
+        printf("Budget list is full.\n");
+        return;
     }
+
+    getchar();
+    printf("Enter department: ");
+    fgets(budgets[*count].department, 50, stdin);
+    budgets[*count].department[strlen(budgets[*count].department) - 1] = '\0';
+
+    printf("Enter allocated budget: ");
+    scanf("%f", &budgets[*count].allocated);
+    if (budgets[*count].allocated < 0) {
+        printf("Budget cannot be negative.\n");
+        return;
+    }
+
+    printf("Enter expenditure: ");
+    scanf("%f", &budgets[*count].expenditure);
+    if (budgets[*count].expenditure < 0) {
+        printf("Expenditure cannot be negative.\n");
+        return;
+    }
+
+    (*count)++;
+    printf("Budget added successfully.\n");
 }
 
-void displayBudgets(char deptNames[][50], float allocated[], float expenses[], int count)
+void displayBudgets(struct Budget budgets[], int count)
 {
-    printf("\n=== MUNICIPAL BUDGET OVERVIEW ===\n");
+    int i;
 
-    for (int i = 0; i < count; i++)
-    {
-        float remaining = calculateRemainingBudget(allocated[i], expenses[i]);
+    if (count == 0) {
+        printf("No budgets found.\n");
+        return;
+    }
 
-        printf("\nDepartment: %s\n", deptNames[i]);
-        printf("Allocated Budget: N$%.2f\n", allocated[i]);
-        printf("Expenditure: N$%.2f\n", expenses[i]);
-        printf("Remaining Budget: N$%.2f\n", remaining);
+    for (i = 0; i < count; i++) {
+        printf("\nDepartment: %s\n", budgets[i].department);
+        printf("Allocated Budget: N$%.2f\n", budgets[i].allocated);
+        printf("Expenditure: N$%.2f\n", budgets[i].expenditure);
+        printf("Remaining Budget: N$%.2f\n", calculateRemaining(budgets[i]));
 
-        if (remaining < 0)
-        {
-            printf("Status: EXCEEDED BUDGET\n");
-        }
-        else
-        {
+        if (budgets[i].expenditure <= budgets[i].allocated)
             printf("Status: WITHIN BUDGET\n");
+        else
+            printf("Status: EXCEEDED BUDGET\n");
+    }
+}
+
+float calculateRemaining(struct Budget budget)
+{
+    return budget.allocated - budget.expenditure;
+}
+
+void searchBudget(struct Budget budgets[], int count)
+{
+    char department[50];
+    int i;
+    int found = 0;
+
+    getchar();
+    printf("Enter department: ");
+    fgets(department, 50, stdin);
+    department[strlen(department) - 1] = '\0';
+
+    for (i = 0; i < count; i++) {
+        if (strcmp(budgets[i].department, department) == 0) {
+            printf("Department found: %s\n", budgets[i].department);
+            printf("Remaining: N$%.2f\n", calculateRemaining(budgets[i]));
+            found = 1;
         }
     }
+
+    if (found == 0)
+        printf("Department budget not found.\n");
 }
