@@ -1,10 +1,20 @@
-#ifndef EMPLOYEE_H
-#define EMPLOYEE_H
+#ifndef EMPLOYEES_H
+#define EMPLOYEES_H
 
-void addEmployee(void);
-void displayEmployee(int index);
-void searchEmployee(void);
-void calculateSalary(void);
-void employeeMenu(void);
+#define MAX_EMPLOYEES 100
+
+struct Employee {
+    int id;
+    char name[50];
+    char department[50];
+    float basicSalary;
+    float housingAllowance;
+    float transportAllowance;
+};
+
+void addEmployee(struct Employee employees[], int *count);
+void displayEmployees(struct Employee employees[], int count);
+void searchEmployee(struct Employee employees[], int count);
+float calculateSalary(struct Employee employee);
 
 #endif
