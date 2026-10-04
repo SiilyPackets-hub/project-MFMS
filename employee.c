@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <employee.h>
 
 int id[100];
 char name[100][50];
