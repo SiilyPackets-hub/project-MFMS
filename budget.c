@@ -8,10 +8,10 @@ void addBudget(struct Budget budgets[], int *count) {
         return;
     }
 
-    getchar();
-    printf("Enter department: ");
+getchar();
+  printf("Enter department: ");
     fgets(budgets[*count].department, 50, stdin);
-    budgets[*count].department[strlen(budgets[*count].department) - 1] = '\0';
+   budgets[*count].department[strlen(budgets[*count].department) - 1] = '\0';
 
     printf("Enter allocated budget: ");
     scanf("%f", &budgets[*count].allocated);
@@ -22,17 +22,16 @@ void addBudget(struct Budget budgets[], int *count) {
 
     printf("Enter expenditure: ");
     scanf("%f", &budgets[*count].expenditure);
-    if (budgets[*count].expenditure < 0) {
-        printf("Expenditure cannot be negative.\n");
-        return;
+        if (budgets[*count].expenditure < 0) {
+            printf("Expenditure cannot be negative.\n");
+      return;
     }
 
     (*count)++;
     printf("Budget added successfully.\n");
 }
 
-void displayBudgets(struct Budget budgets[], int count)
-{
+void displayBudgets(struct Budget budgets[], int count) {
     int i;
 
     if(count == 0) {
@@ -60,11 +59,11 @@ float calculateRemaining(struct Budget budget) {
 
 void searchBudget(struct Budget budgets[], int count)
 {
-    char department[50];
-    int i, found = 0;
-     getchar();
-    printf("Enter department: ");
-    fgets(department, 50, stdin);
+        char department[50];
+        int i, found = 0;
+         getchar();
+        printf("Enter department: ");
+        fgets(department, 50, stdin);
     department[strlen(department) - 1] = '\0';
 
     for (i = 0; i < count; i++) {
