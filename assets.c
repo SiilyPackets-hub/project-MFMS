@@ -7,19 +7,18 @@ void addAsset(struct Asset assets[], int *count)
     if (*count >= MAX_ASSETS) {
         printf("Asset list is full.\n");
         return;
-    }
-
-    printf("Enter asset ID: ");
-    scanf("%d", &assets[*count].id);
-    getchar();
+}
+ printf("Enter asset ID: ");
+scanf("%d", &assets[*count].id);
+getchar();
 
     printf("Enter asset name: ");
     fgets(assets[*count].name, 50, stdin);
     assets[*count].name[strlen(assets[*count].name) - 1] = '\0';
 
-    printf("Enter asset type: ");
-    fgets(assets[*count].type, 30, stdin);
-    assets[*count].type[strlen(assets[*count].type) - 1] = '\0';
+printf("Enter asset type: ");
+fgets(assets[*count].type, 30, stdin);
+assets[*count].type[strlen(assets[*count].type) - 1] = '\0';
 
     printf("Enter purchase value: ");
     scanf("%f", &assets[*count].value);
@@ -27,28 +26,28 @@ void addAsset(struct Asset assets[], int *count)
         printf("Value cannot be negative.\n");
         return;
     }
-    getchar();
+ getchar();
 
-    printf("Enter department: ");
-    fgets(assets[*count].department, 50, stdin);
-    assets[*count].department[strlen(assets[*count].department) - 1] = '\0';
+        printf("Enter department: ");
+        fgets(assets[*count].department, 50, stdin);
+        assets[*count].department[strlen(assets[*count].department) - 1] = '\0';
 
-    printf("Enter condition: ");
+     printf("Enter condition: ");
     fgets(assets[*count].condition, 30, stdin);
-    assets[*count].condition[strlen(assets[*count].condition) - 1] = '\0';
+     assets[*count].condition[strlen(assets[*count].condition) - 1] = '\0';
 
     (*count)++;
     printf("Asset added successfully.\n");
-}
+    }
 
 void displayAssets(struct Asset assets[], int count)
 {
-    int i;
+int i;
 
     if (count == 0) {
         printf("No assets found.\n");
         return;
-    }
+ }
 
     for (i = 0; i < count; i++) {
         printf("\nID: %d\n", assets[i].id);
@@ -60,8 +59,7 @@ void displayAssets(struct Asset assets[], int count)
     }
 }
 
-void searchAsset(struct Asset assets[], int count)
-{
+void searchAsset(struct Asset assets[], int count){
     char name[50];
     int i;
     int found = 0;
