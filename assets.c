@@ -1,103 +1,84 @@
 #include <stdio.h>
 #include <string.h>
-#include "assets.h" 
+#include "assets.h"
 
-int main() {
-    struct Asset assets[MAX];
-    int count = 0;
-    int choice;
+void addAsset(struct Asset assets[], int *count)
+{
+    if (*count >= MAX_ASSETS) {
+        printf("Asset list is full.\n");
+        return;
+    }
 
-    do {
-        printf("\n=== MUNICIPAL ASSET MANAGEMENT ===\n");
-        printf("1. Add Asset\n");
-        printf("2. Display All Assets\n");
-        printf("3. Search Asset by Name\n");
-        printf("4. Exit\n");
-        printf("Enter your choice: ");
-        
-        scanf("%d", &choice);
-        while(getchar() != '\n'); 
+    printf("Enter asset ID: ");
+    scanf("%d", &assets[*count].id);
+    getchar();
 
-        switch(choice) {
-            case 1:
-                if (count < MAX) {
-                    assets[count].id = count + 1;
+    printf("Enter asset name: ");
+    fgets(assets[*count].name, 50, stdin);
+    assets[*count].name[strlen(assets[*count].name) - 1] = '\0';
 
-                    printf("Enter Asset Name: ");
-                    fgets(assets[count].name, 50, stdin);
-                    assets[count].name[strcspn(assets[count].name, "\n")] = '\0';
+    printf("Enter asset type: ");
+    fgets(assets[*count].type, 30, stdin);
+    assets[*count].type[strlen(assets[*count].type) - 1] = '\0';
 
-                    printf("Enter Asset Type (e.g., Vehicle, Computer, Building): ");
-                    fgets(assets[count].type, 50, stdin);
-                    assets[count].type[strcspn(assets[count].type, "\n")] = '\0';
+    printf("Enter purchase value: ");
+    scanf("%f", &assets[*count].value);
+    if (assets[*count].value < 0) {
+        printf("Value cannot be negative.\n");
+        return;
+    }
+    getchar();
 
-                    printf("Enter Purchase Value (N$): ");
-                    scanf("%lf", &assets[count].value);
-                    while(getchar() != '\n');
+    printf("Enter department: ");
+    fgets(assets[*count].department, 50, stdin);
+    assets[*count].department[strlen(assets[*count].department) - 1] = '\0';
 
-                    printf("Enter Department: ");
-                    fgets(assets[count].department, 50, stdin);
-                    assets[count].department[strcspn(assets[count].department, "\n")] = '\0';
+    printf("Enter condition: ");
+    fgets(assets[*count].condition, 30, stdin);
+    assets[*count].condition[strlen(assets[*count].condition) - 1] = '\0';
 
-                    printf("Enter Condition (e.g., Good, Fair, Poor): ");
-                    fgets(assets[count].condition, 50, stdin);
-                    assets[count].condition[strcspn(assets[count].condition, "\n")] = '\0';
+    (*count)++;
+    printf("Asset added successfully.\n");
+}
 
-                    count++;
-                    printf("Asset added successfully! ID: %d\n", assets[count - 1].id);
-                } else {
-                    printf("Asset register is full!\n");
-                }
-                break;
+void displayAssets(struct Asset assets[], int count)
+{
+    int i;
 
-            case 2:
-                if (count == 0) {
-                    printf("\nNo assets registered yet.\n");
-                } else {
-                    printf("\n--- MUNICIPAL ASSET REGISTER ---\n");
-                    for (int i = 0; i < count; i++) {
-                        printf("[%d] Name: %s | Type: %s | Value: N$%.2lf | Dept: %s | Condition: %s\n",
-                               assets[i].id, assets[i].name, assets[i].type, 
-                               assets[i].value, assets[i].department, assets[i].condition);
-                    }
-                }
-                break;
+    if (count == 0) {
+        printf("No assets found.\n");
+        return;
+    }
 
-            case 3:
-                if (count == 0) {
-                    printf("\nNo assets available to search.\n");
-                } else {
-                    char searchName[50];
-                    printf("Enter Asset Name to search: ");
-                    fgets(searchName, 50, stdin);
-                    searchName[strcspn(searchName, "\n")] = '\0';
+    for (i = 0; i < count; i++) {
+        printf("\nID: %d\n", assets[i].id);
+        printf("Name: %s\n", assets[i].name);
+        printf("Type: %s\n", assets[i].type);
+        printf("Purchase Value: N$%.2f\n", assets[i].value);
+        printf("Department: %s\n", assets[i].department);
+        printf("Condition: %s\n", assets[i].condition);
+    }
+}
 
-                    int found = 0;
-                    for (int i = 0; i < count; i++) {
-                        if (strcmp(assets[i].name, searchName) == 0) {
-                            printf("\nAsset Found!\n");
-                            printf("ID: %d\nName: %s\nType: %s\nValue: N$%.2lf\nDepartment: %s\nCondition: %s\n",
-                                   assets[i].id, assets[i].name, assets[i].type, 
-                                   assets[i].value, assets[i].department, assets[i].condition);
-                            found = 1;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        printf("Asset '%s' not found.\n", searchName);
-                    }
-                }
-                break;
+void searchAsset(struct Asset assets[], int count)
+{
+    char name[50];
+    int i;
+    int found = 0;
 
-            case 4:
-                printf("Exiting Asset Management. Goodbye!\n");
-                break;
+    getchar();
+    printf("Enter asset name: ");
+    fgets(name, 50, stdin);
+    name[strlen(name) - 1] = '\0';
 
-            default:
-                printf("Invalid choice! Please select between 1 and 4.\n");
+    for (i = 0; i < count; i++) {
+        if (strcmp(assets[i].name, name) == 0) {
+            printf("Asset found: %d - %s - %s\n",
+                   assets[i].id, assets[i].name, assets[i].condition);
+            found = 1;
         }
+    }
 
-    } while (choice != 4);
-
-    return 0;
+    if (found == 0)
+        printf("Asset not found.\n");
 }
