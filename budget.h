@@ -1,11 +1,17 @@
 #ifndef BUDGET_H
 #define BUDGET_H
 
-#define MAX_DEPTS 5
-void displayBudgetMenu();
+#define MAX_BUDGETS 50
 
-void enterBudgets(char deptNames[][50], float allocated[], float expenses[], int count);
-void displayBudgets(char deptNames[][50], float allocated[], float expenses[], int count);
-float calculateRemainingBudget(float allocated, float expenditure);
+struct Budget {
+    char department[50];
+    float allocated;
+    float expenditure;
+};
+
+void addBudget(struct Budget budgets[], int *count);
+void displayBudgets(struct Budget budgets[], int count);
+float calculateRemaining(struct Budget budget);
+void searchBudget(struct Budget budgets[], int count);
 
 #endif
