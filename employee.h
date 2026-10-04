@@ -1,7 +1,10 @@
-#include <stdio.h>
-#include <string.h>
-void addEmployee();
+#ifndef EMPLOYEE_H
+#define EMPLOYEE_H
+
+void addEmployee(void);
 void displayEmployee(int index);
-void searchEmployee();
-void calculateSalary(); 
-void employeeMenu();
+void searchEmployee(void);
+void calculateSalary(void);
+void employeeMenu(void);
+
+#endif
