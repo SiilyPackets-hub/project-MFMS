@@ -7,25 +7,24 @@
 
 void displayMenu()
 {
-      printf("\n========================================\n");
-      printf(" \nMUNICIPAL FINANCIAL MANAGEMENT SYSTEM\n");
-      printf("\n========================================\n");
-      printf("1. Employee Management\n");
-      printf("2. Budget Management\n");
-      printf("3. Supplier Management\n");
-      printf("4. Asset Management\n");
-      printf("5. Reports\n");
-      printf("6. Exit\n");
-      printf("Enter your choice: ");
+    printf("\n========================================\n");
+    printf(" MUNICIPAL FINANCIAL MANAGEMENT SYSTEM\n");
+    printf("========================================\n");
+    printf("1. Employee Management\n");
+    printf("2. Budget Management\n");
+    printf("3. Supplier Management\n");
+    printf("4. Asset Management\n");
+    printf("5. Reports\n");
+printf("6. Exit\n");
+    printf("Enter your choice: ");
 }
 
-void employeeMenu
-   (struct Employee employees[], int *count)
-  {
+void employeeMenu(struct Employee employees[], int *count)
+{
     int choice;
     do {
         printf("\nEMPLOYEE MANAGEMENT\n");
-        printf("1. Add Employee\n. Display Employees\n. Search Employee\n. Calculate/Display Salary\n. Back\n");
+        printf("1. Add Employee\n2. Display Employees\n3. Search Employee\n4. Calculate/Display Salary\n0. Back\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
         if (choice == 1) addEmployee(employees, count);
@@ -41,7 +40,7 @@ void budgetMenu(struct Budget budgets[], int *count)
     int choice;
     do {
         printf("\nBUDGET MANAGEMENT\n");
-        printf("1. Enter Department Budget\n. Display Budgets\n. Search Budget\n. Back\n");
+        printf("1. Enter Department Budget\n2. Display Budgets\n3. Search Budget\n0. Back\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
         if (choice == 1) addBudget(budgets, count);
@@ -56,7 +55,7 @@ void supplierMenu(struct Supplier suppliers[], int *count)
     int choice;
     do {
         printf("\nSUPPLIER MANAGEMENT\n");
-        printf("1. Add Supplier\n. Display Suppliers\n. Search Supplier\n. Back\n");
+        printf("1. Add Supplier\n2. Display Suppliers\n3. Search Supplier\n0. Back\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
         if (choice == 1) addSupplier(suppliers, count);
@@ -71,7 +70,7 @@ void assetMenu(struct Asset assets[], int *count)
     int choice;
     do {
         printf("\nASSET MANAGEMENT\n");
-        printf("1. Add Asset\n. Display Assets\n. Search Asset\n. Back\n");
+        printf("1. Add Asset\n2. Display Assets\n3. Search Asset\n0. Back\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
         if (choice == 1) addAsset(assets, count);
@@ -89,7 +88,7 @@ void reportMenu(struct Employee employees[], int employeeCount,
     int choice;
     do {
         printf("\nREPORTS\n");
-        printf("1. Employee Report\n. Budget Report\n. Supplier Report\n. Asset Report\n. Back\n");
+        printf("1. Employee Report\n2. Budget Report\n3. Supplier Report\n4. Asset Report\n0. Back\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
         if (choice == 1) employeeReport(employees, employeeCount);
